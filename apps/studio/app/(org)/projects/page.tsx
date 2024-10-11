@@ -1,9 +1,11 @@
-import { useRouter } from 'next/router'
+'use client'
+
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { ProjectList } from 'components/interfaces/Home/ProjectList'
 import HomePageActions from 'components/interfaces/HomePageActions'
-import AccountLayout from 'components/layouts/AccountLayout/AccountLayout'
+// import AccountLayout from 'app/(org)/layout'
 import AlertError from 'components/ui/AlertError'
 import { Loading } from 'components/ui/Loading'
 import { useOrganizationsQuery } from 'data/organizations/organizations-query'
@@ -11,9 +13,9 @@ import { useAutoProjectsPrefetch } from 'data/projects/projects-query'
 import { useIsFeatureEnabled } from 'hooks/misc/useIsFeatureEnabled'
 import { useFlag } from 'hooks/ui/useFlag'
 import { IS_PLATFORM, LOCAL_STORAGE_KEYS, PROJECT_STATUS } from 'lib/constants'
-import type { NextPageWithLayout } from 'types'
+// import type { NextPageWithLayout } from 'types'
 
-const ProjectsPage: NextPageWithLayout = () => {
+const ProjectsPage = () => {
   const router = useRouter()
   const [search, setSearch] = useState('')
   const [filterStatus, setFilterStatus] = useState<string[]>([
@@ -90,18 +92,18 @@ const ProjectsPage: NextPageWithLayout = () => {
   )
 }
 
-ProjectsPage.getLayout = (page) => (
-  <AccountLayout
-    title="Dashboard"
-    breadcrumbs={[
-      {
-        key: `supabase-projects`,
-        label: 'Projects',
-      },
-    ]}
-  >
-    {page}
-  </AccountLayout>
-)
+// ProjectsPage.getLayout = (page) => (
+//   <AccountLayout
+//     title="Dashboard"
+//     breadcrumbs={[
+//       {
+//         key: `supabase-projects`,
+//         label: 'Projects',
+//       },
+//     ]}
+//   >
+//     {page}
+//   </AccountLayout>
+// )
 
 export default ProjectsPage
