@@ -99,7 +99,7 @@ const FeaturePage: React.FC<FeaturePageProps> = ({ feature, prevFeature, nextFea
                 flex flex-col
                 gap-4 md:gap-8
                 text-foreground-light
-                !py-10
+                !pt-10 !pb-4
               "
             >
               <div className="relative h-full flex flex-col items-start gap-2 w-full max-w-2xl mx-auto">
@@ -186,6 +186,29 @@ const FeaturePage: React.FC<FeaturePageProps> = ({ feature, prevFeature, nextFea
             </SectionContainer>
           </header>
           <SectionContainer className="!pt-0">
+            <div className="prose w-full max-w-3xl mx-auto pb-4 mb-8 border-b flex flex-col md:flex-row gap-4 md:gap-8 flex-wrap justify-center text-sm text-foreground-lighter">
+              <div className="flex gap-2 items-center">
+                <span>Stage:</span>
+                <Badge>{feature.status?.stage}</Badge>
+              </div>
+              <div className="flex gap-2 items-center">
+                <span>Available on self-hosted:</span>
+                {feature.status?.selfHostedTooling ? (
+                  <Badge className="flex gap-1.5">
+                    Requires
+                    <Link
+                      href={feature.status?.selfHostedTooling.link}
+                      target="_blank"
+                      className="translate-y-px hover:cursor-pointer"
+                    >
+                      {feature.status?.selfHostedTooling?.label}
+                    </Link>
+                  </Badge>
+                ) : (
+                  <Badge>{feature.status?.availableOnSelfHosted ? 'Yes' : 'N/A'}</Badge>
+                )}
+              </div>
+            </div>
             <main className="max-w-xl mx-auto flex flex-col items-start gap-8">
               <div className="prose prose-docs">
                 <ReactMarkdown>{feature.description}</ReactMarkdown>
